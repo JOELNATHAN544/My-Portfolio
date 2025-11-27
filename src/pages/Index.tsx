@@ -1,24 +1,23 @@
-import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Services from "@/components/Services";
-import Portfolio from "@/components/Portfolio";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import Layout from "@/components/layout/Layout";
+import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
+import Skills from "@/components/sections/Skills";
+import Services from "@/components/sections/Services";
+import Portfolio from "@/components/sections/Portfolio";
+import Musician from "@/components/sections/Musician";
+import Contact from "@/components/sections/Contact";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <Navigation />
+    <Layout>
       <Hero />
       <About />
       <Skills />
       <Services />
       <Portfolio />
+      <Musician />
       <Contact />
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 
