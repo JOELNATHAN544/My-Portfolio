@@ -15,20 +15,19 @@ const Portfolio = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                    {/* Project Preview (Placeholder) */}
+                    {/* Project Preview */}
                     <div className="relative group rounded-xl overflow-hidden border border-border shadow-lg aspect-video bg-muted flex items-center justify-center">
                         <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                             <div className="flex gap-4">
-                                <a href="#" className="p-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors">
+                                <a href="https://linksphere-98u3.onrender.com/" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors">
                                     <ExternalLink className="w-5 h-5" />
                                 </a>
-                                <a href="#" className="p-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors">
+                                <a href="https://github.com/Vitalisn4/LinkSphere" target="_blank" rel="noopener noreferrer" className="p-2 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors">
                                     <Github className="w-5 h-5" />
                                 </a>
                             </div>
                         </div>
-                        <Link className="w-16 h-16 text-muted-foreground/50" />
-                        <span className="sr-only">Linksphere App Preview</span>
+                        <img src="/linksphere-icon.png" alt="Linksphere Logo" className="w-32 h-32 object-contain" />
                     </div>
 
                     {/* Project Details */}
@@ -77,7 +76,9 @@ const Portfolio = () => {
                                 <ExternalLink className="ml-2 w-4 h-4" />
                             </a>
                             <a
-                                href="#"
+                                href="https://github.com/Vitalisn4/LinkSphere"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-secondary text-secondary-foreground font-medium hover:bg-secondary/80 transition-all border border-border"
                             >
                                 GitHub Repo
