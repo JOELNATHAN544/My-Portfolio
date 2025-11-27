@@ -1,31 +1,80 @@
-import { GraduationCap, Award, Briefcase } from "lucide-react";
+import { GraduationCap, Award, Briefcase, Code, Database, Cpu, Music } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 const About = () => {
   const education = [
     {
+      icon: <GraduationCap className="w-6 h-6 text-primary" />,
       title: "GCE A Level",
       year: "2024",
-      details: "Mathematics, Further Mathematics, Chemistry, Computer Science, Physics",
+      institution: "Bilingual Grammar School Molyko, Buea",
+      details: [
+        "Mathematics",
+        "Further Mathematics",
+        "Chemistry", 
+        "Computer Science",
+        "Physics"
+      ],
     },
+    {
+      icon: <Code className="w-6 h-6 text-primary" />,
+      title: "Full-Stack Development Training",
+      year: "2023",
+      institution: "GIS Training Center, Bangangté, Cameroon",
+      details: [
+        "Modern web development technologies",
+        "System architecture design",
+        "Database management",
+        "API development"
+      ],
+    }
   ];
 
   const certifications = [
-    "LPIC (Linux Professional Institute Certification)",
-    "HashiCorp Terraform Certification",
-    "Oracle Java Certification",
+    {
+      icon: <Cpu className="w-6 h-6 text-accent" />,
+      title: "LPIC-1",
+      issuer: "Linux Professional Institute",
+      year: "2023"
+    },
+    {
+      icon: <Database className="w-6 h-6 text-accent" />,
+      title: "HashiCorp Certified: Terraform Associate",
+      issuer: "HashiCorp",
+      year: "2023"
+    },
+    {
+      icon: <Code className="w-6 h-6 text-accent" />,
+      title: "Oracle Certified Associate: Java SE 8 Programmer",
+      issuer: "Oracle",
+      year: "2022"
+    }
   ];
 
-  const training = {
-    title: "Full-Stack Development Training",
-    institution: "GIS Training Center, Bangangté, Cameroon",
-    description: "Comprehensive training in modern web development technologies and practices",
-  };
+  const skillsOverview = [
+    {
+      category: "Backend",
+      description: "Designing robust, scalable server-side applications with clean architecture"
+    },
+    {
+      category: "Databases",
+      description: "Efficient data modeling and optimization for performance and reliability"
+    },
+    {
+      category: "DevOps",
+      description: "CI/CD pipelines, containerization, and cloud infrastructure"
+    },
+    {
+      category: "Music",
+      description: "Piano composition and music production"
+    }
+  ];
 
   return (
-    <section id="about" className="py-20 bg-secondary/30">
+    <section id="about" className="py-20 bg-secondary/10">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
+          
           {/* Section header */}
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl lg:text-5xl font-bold mb-4">
@@ -39,84 +88,125 @@ const About = () => {
           {/* Main content */}
           <div className="grid lg:grid-cols-2 gap-12 mb-12">
             {/* Bio */}
-            <div className="space-y-6 animate-fade-in">
-              <Card className="p-8 shadow-soft hover:shadow-glow transition-all duration-300">
-                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+            <div className="space-y-8">
+              <Card className="p-8 shadow-soft hover:shadow-glow transition-all duration-300 animate-fade-in">
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <Briefcase className="w-6 h-6 text-primary" />
-                  My Journey
+                  My Professional Journey
                 </h3>
                 <div className="space-y-4 text-muted-foreground">
                   <p>
-                    I'm a full-stack engineer who specializes in the intricate art of 
-                    <span className="text-primary font-semibold"> system architecture</span>, 
-                    <span className="text-primary font-semibold"> database management</span>, and 
-                    <span className="text-primary font-semibold"> API design</span>. 
-                    My approach combines technical precision with creative problem-solving.
+                    I'm a full-stack engineer with a strong foundation in system architecture, database design, and API development. 
                   </p>
                   <p>
-                    Beyond the world of code, I'm also a musician, bringing the same dedication 
-                    to harmony and rhythm that I apply to elegant code and efficient systems. 
-                    This unique blend allows me to approach challenges from multiple perspectives, 
-                    creating solutions that are both technically sound and creatively inspired.
+                    My artistic background as a musician helps me bring creativity and balance into problem-solving and user experience.
                   </p>
-                  <p>
-                    I believe in building systems that scale, databases that perform, and 
-                    APIs that developers love to work with. Every project is an opportunity 
-                    to craft something exceptional.
-                  </p>
+                </div>
+              </Card>
+
+              {/* Skills */}
+              <Card className="p-8 shadow-soft hover:shadow-glow transition-all duration-300 animate-fade-in">
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <Code className="w-6 h-6 text-primary" />
+                  What I Bring to the Table
+                </h3>
+
+                <div className="grid gap-4">
+                  {skillsOverview.map((skill, index) => (
+                    <div key={index} className="flex items-start gap-4">
+                      <div className="p-2 rounded-full bg-primary/10 text-primary mt-0.5">
+                        {skill.category === "Music" ? (
+                          <Music className="w-5 h-5" />
+                        ) : skill.category === "Backend" ? (
+                          <Code className="w-5 h-5" />
+                        ) : skill.category === "Databases" ? (
+                          <Database className="w-5 h-5" />
+                        ) : (
+                          <Cpu className="w-5 h-5" />
+                        )}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground">{skill.category}</h4>
+                        <p className="text-sm text-muted-foreground">{skill.description}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </Card>
             </div>
 
             {/* Education & Certifications */}
-            <div className="space-y-6">
+            <div className="space-y-8">
+              
               {/* Education */}
               <Card className="p-8 shadow-soft hover:shadow-glow transition-all duration-300 animate-fade-in">
-                <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <GraduationCap className="w-6 h-6 text-primary" />
-                  Education
+                  Education & Training
                 </h3>
-                <div className="space-y-4">
-                  {education.map((edu, index) => (
-                    <div key={index} className="border-l-4 border-primary pl-4">
-                      <div className="flex items-start justify-between mb-2">
-                        <h4 className="font-semibold text-lg">{edu.title}</h4>
-                        <span className="text-sm text-muted-foreground bg-primary/10 px-3 py-1 rounded-full">
-                          {edu.year}
+                <div className="space-y-6">
+                  {education.map((item, index) => (
+                    <div key={index} className="relative pl-10 pb-6 border-l-2 border-primary/20 last:border-0 last:pb-0">
+                      <div className="absolute left-0 top-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center -ml-3.5">
+                        {item.icon}
+                      </div>
+
+                      <div className="flex justify-between items-start">
+                        <h4 className="font-semibold text-foreground">{item.title}</h4>
+                        <span className="text-sm bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                          {item.year}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">{edu.details}</p>
+                      <p className="text-sm text-muted-foreground mb-2">{item.institution}</p>
+
+                      <ul className="list-disc list-inside text-sm space-y-1 mt-2">
+                        {item.details.map((detail, i) => (
+                          <li key={i} className="text-muted-foreground">{detail}</li>
+                        ))}
+                      </ul>
                     </div>
                   ))}
-                  
-                  <div className="mt-6 p-4 bg-secondary rounded-lg">
-                    <h4 className="font-semibold mb-2">{training.title}</h4>
-                    <p className="text-sm text-muted-foreground mb-1">{training.institution}</p>
-                    <p className="text-sm text-muted-foreground">{training.description}</p>
-                  </div>
                 </div>
               </Card>
 
               {/* Certifications */}
               <Card className="p-8 shadow-soft hover:shadow-glow transition-all duration-300 animate-fade-in">
-                <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                  <Award className="w-6 h-6 text-accent" />
-                  Professional Certifications
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <Award className="w-6 h-6 text-primary" />
+                  Certifications
                 </h3>
-                <ul className="space-y-3">
+
+                <div className="space-y-4">
                   {certifications.map((cert, index) => (
-                    <li 
-                      key={index}
-                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent/5 transition-colors"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
-                      <span className="text-muted-foreground">{cert}</span>
-                    </li>
+                    <div key={index} className="flex items-start gap-4">
+                      <div className="p-2 rounded-full bg-accent/10 text-accent mt-0.5">
+                        {cert.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-foreground">{cert.title}</h4>
+                        <p className="text-sm text-muted-foreground">
+                          {cert.issuer} • {cert.year}
+                        </p>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </Card>
             </div>
           </div>
+
+          {/* Personal Note */}
+          <div className="max-w-4xl mx-auto text-center animate-fade-in">
+            <Card className="p-8 bg-primary/5 border-primary/20">
+              <div className="flex flex-col items-center">
+                <Music className="w-8 h-8 text-accent mb-4" />
+                <p className="text-lg text-muted-foreground italic">
+                  "My journey in technology is deeply intertwined with my love for music. Both require creativity, precision, and structure."
+                </p>
+              </div>
+            </Card>
+          </div>
+
         </div>
       </div>
     </section>
@@ -124,3 +214,4 @@ const About = () => {
 };
 
 export default About;
+
