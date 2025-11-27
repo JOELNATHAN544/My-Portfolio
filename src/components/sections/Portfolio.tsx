@@ -27,7 +27,7 @@ const Portfolio = () => {
                                 </a>
                             </div>
                         </div>
-                        <img src="/linksphere-icon.png" alt="Linksphere Logo" className="w-32 h-32 object-contain" />
+                        <img src="/linksphere-icon.png" alt="Linksphere Logo" className="w-full h-full object-cover" />
                     </div>
 
                     {/* Project Details */}
