@@ -1,197 +1,189 @@
+"use client";
+
+import { useState, ChangeEvent, FormEvent } from "react";
+import { Mail, Phone, Linkedin, Send } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Mail, Phone, Linkedin, Send, Loader2 } from "lucide-react";
-import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
-import emailjs from "@emailjs/browser";
 
-const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+export default function Contact() {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "wankojoelnathan@gmail.com",
-      href: "mailto:wankojoelnathan@gmail.com",
-    },
-    {
-      icon: Phone,
-      label: "WhatsApp",
-      value: "+237 659735264",
-      href: "https://wa.me/237659735264",
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      value: "JoelNathan Wanko",
-      href: "https://linkedin.com/in/joelnathan-wanko",
-    },
-  ];
+  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  // --- HANDLE INPUT CHANGE ---
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
 
-    try {
-      await emailjs.send(
-        "service_6bmmtri",
-        "template_mi14z8p",
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-        },
-        "fRqe_WZdAEvwduSZD"
-      );
+    setFormData((prev) => ({ ...prev, [name]: value }));
 
-      toast({
-        title: "Message sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
-      });
-
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.error("EmailJS error:", error);
-      toast({
-        title: "Failed to send message",
-        description: "Please try again or contact me via WhatsApp.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+    // Clear error when user types
+    if (errors[name as keyof FormData]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
+  // --- VALIDATION ---
+  const validate = () => {
+    const newErrors: Partial<FormData> = {};
+
+    if (!formData.name.trim()) newErrors.name = "Name is required.";
+    if (!formData.email.trim()) newErrors.email = "Email is required.";
+    else if (!/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Invalid email format.";
+
+    if (!formData.message.trim())
+      newErrors.message = "Please enter a message.";
+
+    return newErrors;
+  };
+
+  // --- FORM SUBMIT ---
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setSubmitted(true);
+
+    // Here you can add a backend submission or email service (resend, formsubmit, etc.)
+    console.log("Form submitted:", formData);
   };
 
   return (
-    <section id="contact" className="py-20 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Section header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-              Get In <span className="gradient-hero bg-clip-text text-transparent">Touch</span>
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Have a project in mind? Let's work together to bring your ideas to life
-            </p>
-          </div>
+    <section id="contact" className="py-20">
+      <div className="container max-w-5xl mx-auto px-4">
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact information */}
-            <div className="space-y-8 animate-fade-in">
-              <div>
-                <h3 className="text-2xl font-bold mb-6">Let's Connect</h3>
-                <p className="text-muted-foreground mb-8">
-                  Feel free to reach out through any of these channels. I'm always open to 
-                  discussing new projects, creative ideas, or opportunities to be part of your vision.
-                </p>
-              </div>
+        {/* Section title */}
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-4xl font-bold mb-4">Contact Me</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Feel free to reach out for collaborations, projects, or questions.
+          </p>
+        </div>
 
-              <div className="space-y-4">
-                {contactInfo.map((info, index) => {
-                  const Icon = info.icon;
-                  return (
-                    <Card 
-                      key={index}
-                      className="p-6 shadow-soft hover:shadow-glow transition-all duration-300 group cursor-pointer"
-                      onClick={() => window.open(info.href, "_blank")}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                          <Icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
-                        </div>
-                        <div>
-                          <div className="text-sm text-muted-foreground">{info.label}</div>
-                          <div className="font-semibold">{info.value}</div>
-                        </div>
-                      </div>
-                    </Card>
-                  );
-                })}
-              </div>
+        <div className="grid md:grid-cols-2 gap-10">
+
+          {/* CONTACT INFO CARD */}
+          <Card className="p-8 shadow-soft animate-fade-in">
+            <h3 className="text-2xl font-semibold mb-6">My Socials</h3>
+
+            <div className="space-y-6">
+
+              <a
+                href="mailto:wankojoelnathan@gmail.com"
+                className="flex items-center gap-4 group"
+              >
+                <Mail className="w-6 h-6 text-primary group-hover:scale-110 transition" />
+                <span className="font-medium">wankojoelnathan@gmail.com</span>
+              </a>
+
+              <a
+                href="https://wa.me/237659735264"
+                target="_blank"
+                className="flex items-center gap-4 group"
+              >
+                <Phone className="w-6 h-6 text-green-600 group-hover:scale-110 transition" />
+                <span className="font-medium">+237 659 735 264</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/joelnathan-wanko"
+                target="_blank"
+                className="flex items-center gap-4 group"
+              >
+                <Linkedin className="w-6 h-6 text-blue-600 group-hover:scale-110 transition" />
+                <span className="font-medium">JoelNathan Wanko</span>
+              </a>
             </div>
+          </Card>
 
-            {/* Contact form */}
-            <Card className="p-8 shadow-soft hover:shadow-glow transition-all duration-300 animate-fade-in">
+          {/* CONTACT FORM */}
+          <Card className="p-8 shadow-soft animate-fade-in">
+            <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
+
+            {submitted ? (
+              <p className="text-green-600 font-medium">
+                Message sent successfully! I will get back to you shortly.
+              </p>
+            ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+
+                {/* NAME */}
                 <div>
-                  <Label htmlFor="name">Your Name</Label>
+                  <label className="font-medium">Name</label>
                   <Input
-                    id="name"
-                    placeholder="John Doe"
+                    name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
-                    className="mt-2"
+                    placeholder="Enter your name"
+                    className={errors.name ? "border-red-500" : ""}
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm">{errors.name}</p>
+                  )}
                 </div>
 
+                {/* EMAIL */}
                 <div>
-                  <Label htmlFor="email">Your Email</Label>
+                  <label className="font-medium">Email</label>
                   <Input
-                    id="email"
-                    type="email"
-                    placeholder="john@example.com"
+                    name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
-                    className="mt-2"
+                    placeholder="Enter your email"
+                    className={errors.email ? "border-red-500" : ""}
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm">{errors.email}</p>
+                  )}
                 </div>
 
+                {/* MESSAGE */}
                 <div>
-                  <Label htmlFor="message">Your Message</Label>
+                  <label className="font-medium">Message</label>
                   <Textarea
-                    id="message"
-                    placeholder="Tell me about your project..."
+                    name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    required
-                    className="mt-2 min-h-[150px]"
+                    placeholder="Write your message..."
+                    rows={5}
+                    className={errors.message ? "border-red-500" : ""}
                   />
+                  {errors.message && (
+                    <p className="text-red-500 text-sm">{errors.message}</p>
+                  )}
                 </div>
 
-                <Button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="w-full gradient-hero hover:shadow-glow transition-all duration-300 group"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </>
-                  )}
+                {/* SUBMIT BUTTON */}
+                <Button type="submit" className="w-full flex items-center gap-2">
+                  Send Message <Send className="w-4 h-4" />
                 </Button>
+
               </form>
-            </Card>
-          </div>
+            )}
+          </Card>
+
         </div>
       </div>
     </section>
   );
-};
-
-export default Contact;
+}
