@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, Linkedin, Send } from "lucide-react";
+import { Mail, Phone, Linkedin, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -14,6 +15,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const contactInfo = [
     {
@@ -36,24 +38,38 @@ const Contact = () => {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Create WhatsApp message
-    const message = `Hello! My name is ${formData.name}.\n\nEmail: ${formData.email}\n\nMessage: ${formData.message}`;
-    const whatsappUrl = `https://wa.me/237659735264?text=${encodeURIComponent(message)}`;
-    
-    // Open WhatsApp
-    window.open(whatsappUrl, "_blank");
-    
-    // Show success toast
-    toast({
-      title: "Opening WhatsApp",
-      description: "Your message has been prepared. Complete sending via WhatsApp.",
-    });
+    setIsSubmitting(true);
 
-    // Reset form
-    setFormData({ name: "", email: "", message: "" });
+    try {
+      await emailjs.send(
+        "service_6bmmtri",
+        "template_mi14z8p",
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        "fRqe_WZdAEvwduSZD"
+      );
+
+      toast({
+        title: "Message sent!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me via WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -154,10 +170,20 @@ const Contact = () => {
 
                 <Button 
                   type="submit" 
+                  disabled={isSubmitting}
                   className="w-full gradient-hero hover:shadow-glow transition-all duration-300 group"
                 >
-                  Send Message
-                  <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
                 </Button>
               </form>
             </Card>
