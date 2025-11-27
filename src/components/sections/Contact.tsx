@@ -8,6 +8,7 @@ import { toast } from "sonner";
 const formSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
+    subject: z.string().min(5, "Subject must be at least 5 characters"),
     message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -29,7 +30,7 @@ const Contact = () => {
         // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 1500));
         console.log(data);
-        toast.success("Message sent successfully!");
+        toast.success("Message sent successfully! (Demo mode)");
         reset();
         setIsSubmitting(false);
     };
@@ -129,6 +130,21 @@ const Contact = () => {
                             </div>
 
                             <div className="space-y-2">
+                                <label htmlFor="subject" className="text-sm font-medium text-foreground">
+                                    Subject
+                                </label>
+                                <input
+                                    id="subject"
+                                    {...register("subject")}
+                                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    placeholder="What is this regarding?"
+                                />
+                                {errors.subject && (
+                                    <p className="text-sm text-destructive">{errors.subject.message}</p>
+                                )}
+                            </div>
+
+                            <div className="space-y-2">
                                 <label htmlFor="message" className="text-sm font-medium text-foreground">
                                     Message
                                 </label>
@@ -160,6 +176,10 @@ const Contact = () => {
                                     </>
                                 )}
                             </button>
+                            <div className="text-xs text-muted-foreground text-center mt-4">
+                                * This form is currently in demo mode. Messages are logged to the console.
+                                For real inquiries, please email me directly.
+                            </div>
                         </form>
                     </div>
                 </div>
