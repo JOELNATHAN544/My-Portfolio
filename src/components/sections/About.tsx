@@ -73,18 +73,27 @@ const About = () => {
                                 <Award className="w-6 h-6 text-primary" />
                                 Certifications
                             </h3>
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <div className="p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
-                                    <h4 className="font-semibold">LPIC</h4>
-                                    <p className="text-xs text-muted-foreground">Linux Professional Institute</p>
+                            <div className="grid sm:grid-cols-1 gap-4">
+                                <div className="p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors flex justify-between items-center">
+                                    <div>
+                                        <h4 className="font-semibold">Certified Terraform Associate 003</h4>
+                                        <p className="text-xs text-muted-foreground">HashiCorp</p>
+                                    </div>
+                                    <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">Nov 2025</span>
                                 </div>
-                                <div className="p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
-                                    <h4 className="font-semibold">HashiCorp Terraform</h4>
-                                    <p className="text-xs text-muted-foreground">Infrastructure as Code</p>
+                                <div className="p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors flex justify-between items-center">
+                                    <div>
+                                        <h4 className="font-semibold">Certified Linux Administrator (LPIC-1)</h4>
+                                        <p className="text-xs text-muted-foreground">Linux Professional Institute</p>
+                                    </div>
+                                    <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">Dec 2024</span>
                                 </div>
-                                <div className="p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors">
-                                    <h4 className="font-semibold">Oracle Java</h4>
-                                    <p className="text-xs text-muted-foreground">Java SE Certification</p>
+                                <div className="p-4 bg-background rounded-lg border border-border hover:border-primary/50 transition-colors flex justify-between items-center">
+                                    <div>
+                                        <h4 className="font-semibold">Java Foundations Certified Junior Associate</h4>
+                                        <p className="text-xs text-muted-foreground">Oracle</p>
+                                    </div>
+                                    <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">Jun 2025</span>
                                 </div>
                             </div>
                         </div>
