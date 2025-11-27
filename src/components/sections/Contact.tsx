@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Loader2, CheckCircle2, XCircle } from "lucide-react";
 import { useState } from "react";
-import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 
 const formSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -16,6 +16,9 @@ type FormData = z.infer<typeof formSchema>;
 
 const Contact = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+    const [errorMessage, setErrorMessage] = useState("");
+
     const {
         register,
         handleSubmit,
@@ -27,12 +30,46 @@ const Contact = () => {
 
     const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        console.log(data);
-        toast.success("Message sent successfully! (Demo mode)");
-        reset();
-        setIsSubmitting(false);
+        setSubmitStatus("idle");
+        setErrorMessage("");
+
+        try {
+            // Replace these with your actual EmailJS credentials
+            const SERVICE_ID = "YOUR_SERVICE_ID";
+            const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+            const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
+            await emailjs.send(
+                SERVICE_ID,
+                TEMPLATE_ID,
+                {
+                    from_name: data.name,
+                    reply_to: data.email,
+                    subject: data.subject,
+                    message: data.message,
+                },
+                PUBLIC_KEY
+            );
+
+            setSubmitStatus("success");
+            reset();
+
+            // Auto-hide success message after 5 seconds
+            setTimeout(() => {
+                setSubmitStatus("idle");
+            }, 5000);
+        } catch (error) {
+            console.error("EmailJS Error:", error);
+            setSubmitStatus("error");
+            setErrorMessage("Failed to send message. Please try again or email me directly.");
+
+            // Auto-hide error message after 5 seconds
+            setTimeout(() => {
+                setSubmitStatus("idle");
+            }, 5000);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -107,6 +144,7 @@ const Contact = () => {
                                     {...register("name")}
                                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                     placeholder="Your name"
+                                    disabled={isSubmitting}
                                 />
                                 {errors.name && (
                                     <p className="text-sm text-destructive">{errors.name.message}</p>
@@ -123,6 +161,7 @@ const Contact = () => {
                                     {...register("email")}
                                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                     placeholder="your.email@example.com"
+                                    disabled={isSubmitting}
                                 />
                                 {errors.email && (
                                     <p className="text-sm text-destructive">{errors.email.message}</p>
@@ -138,6 +177,7 @@ const Contact = () => {
                                     {...register("subject")}
                                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                     placeholder="What is this regarding?"
+                                    disabled={isSubmitting}
                                 />
                                 {errors.subject && (
                                     <p className="text-sm text-destructive">{errors.subject.message}</p>
@@ -153,11 +193,27 @@ const Contact = () => {
                                     {...register("message")}
                                     className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                                     placeholder="How can I help you?"
+                                    disabled={isSubmitting}
                                 />
                                 {errors.message && (
                                     <p className="text-sm text-destructive">{errors.message.message}</p>
                                 )}
                             </div>
+
+                            {/* Status Messages */}
+                            {submitStatus === "success" && (
+                                <div className="flex items-center gap-2 p-4 bg-green-500/10 border border-green-500/20 rounded-md text-green-600 dark:text-green-400 animate-in fade-in slide-in-from-top-2 duration-300">
+                                    <CheckCircle2 className="w-5 h-5" />
+                                    <p className="text-sm font-medium">Message sent successfully! I'll get back to you soon.</p>
+                                </div>
+                            )}
+
+                            {submitStatus === "error" && (
+                                <div className="flex items-center gap-2 p-4 bg-destructive/10 border border-destructive/20 rounded-md text-destructive animate-in fade-in slide-in-from-top-2 duration-300">
+                                    <XCircle className="w-5 h-5" />
+                                    <p className="text-sm font-medium">{errorMessage}</p>
+                                </div>
+                            )}
 
                             <button
                                 type="submit"
@@ -176,9 +232,10 @@ const Contact = () => {
                                     </>
                                 )}
                             </button>
+
                             <div className="text-xs text-muted-foreground text-center mt-4">
-                                * This form is currently in demo mode. Messages are logged to the console.
-                                For real inquiries, please email me directly.
+                                <p>Your message will be sent securely via EmailJS.</p>
+                                <p className="mt-1">For urgent matters, please email me directly.</p>
                             </div>
                         </form>
                     </div>
