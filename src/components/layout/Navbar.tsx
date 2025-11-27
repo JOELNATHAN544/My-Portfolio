@@ -1,0 +1,101 @@
+import { useState, useEffect } from "react";
+import { Menu, X, Code2, Github, Linkedin, Mail } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const navLinks = [
+        { name: "Home", href: "#home" },
+        { name: "About", href: "#about" },
+        { name: "Skills", href: "#skills" },
+        { name: "Services", href: "#services" },
+        { name: "Portfolio", href: "#portfolio" },
+        { name: "Contact", href: "#contact" },
+    ];
+
+    return (
+        <nav
+            className={cn(
+                "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-6 py-4",
+                isScrolled
+                    ? "bg-background/80 backdrop-blur-md shadow-sm py-3"
+                    : "bg-transparent"
+            )}
+        >
+            <div className="max-w-7xl mx-auto flex items-center justify-between">
+                <a href="#home" className="text-2xl font-bold text-primary flex items-center gap-2">
+                    <Code2 className="w-8 h-8" />
+                    <span className="hidden sm:inline">Joel Nathan</span>
+                </a>
+
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center gap-8">
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.name}
+                            href={link.href}
+                            className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm uppercase tracking-wider"
+                        >
+                            {link.name}
+                        </a>
+                    ))}
+                    <a
+                        href="/resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors text-sm font-medium"
+                    >
+                        Resume
+                    </a>
+                </div>
+
+                {/* Mobile Menu Button */}
+                <button
+                    className="md:hidden text-foreground"
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+            </div>
+
+            {/* Mobile Navigation */}
+            {isOpen && (
+                <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border shadow-lg animate-accordion-down">
+                    <div className="flex flex-col p-6 gap-4">
+                        {navLinks.map((link) => (
+                            <a
+                                key={link.name}
+                                href={link.href}
+                                className="text-foreground/80 hover:text-primary transition-colors font-medium text-lg"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {link.name}
+                            </a>
+                        ))}
+                        <a
+                            href="/resume.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors text-center font-medium"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+            )}
+        </nav>
+    );
+};
+
+export default Navbar;
