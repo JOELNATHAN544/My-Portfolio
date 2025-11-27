@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Code2, Github, Linkedin, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -57,15 +58,19 @@ const Navbar = () => {
                     >
                         Resume
                     </a>
+                    <ModeToggle />
                 </div>
 
                 {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-foreground"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                </button>
+                <div className="flex items-center gap-4 md:hidden">
+                    <ModeToggle />
+                    <button
+                        className="text-foreground"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Navigation */}
