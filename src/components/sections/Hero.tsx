@@ -54,13 +54,7 @@ const Hero = () => {
                         <div className="absolute inset-0 border-2 border-primary/20 rounded-full animate-spin-slow" style={{ animationDuration: '15s' }}></div>
                         <div className="absolute inset-4 border-2 border-accent/20 rounded-full animate-spin-reverse-slow" style={{ animationDuration: '20s' }}></div>
                         <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-background shadow-2xl bg-muted flex items-center justify-center">
-                            {/* Placeholder for Profile Picture */}
-                            <div className="text-center p-6">
-                                <span className="text-6xl">👨‍💻</span>
-                                <p className="text-sm text-muted-foreground mt-2">Profile Picture</p>
-                            </div>
-                            {/* Uncomment and use actual image when available */}
-                            {/* <img src="/profile.jpg" alt="Joel Nathan" className="w-full h-full object-cover" /> */}
+                            <img src="/profile.png" alt="Joel Nathan" className="w-full h-full object-cover" />
                         </div>
 
                         {/* Decorative Elements */}
