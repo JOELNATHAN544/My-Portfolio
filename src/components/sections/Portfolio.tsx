@@ -17,7 +17,7 @@ const Portfolio = () => {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Project Preview */}
                     <div className="relative group rounded-xl overflow-hidden border border-border shadow-lg aspect-video bg-muted flex items-center justify-center">
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 z-10">
                             <div className="flex gap-4">
                                 <a href="https://linksphere-98u3.onrender.com/" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors">
                                     <ExternalLink className="w-5 h-5" />
@@ -27,7 +27,11 @@ const Portfolio = () => {
                                 </a>
                             </div>
                         </div>
-                        <img src="/linksphere-icon.png" alt="Linksphere Logo" className="w-full h-full object-cover" />
+                        <img
+                            src="/linksphere-icon.png"
+                            alt="Linksphere Logo"
+                            className="w-full h-full object-cover"
+                        />
                     </div>
 
                     {/* Project Details */}
