@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
-import { Mail, Phone, Linkedin, Send } from "lucide-react";
+import { Mail, Phone, Linkedin, Send, Loader2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 interface FormData {
   name: string;
@@ -14,6 +16,7 @@ interface FormData {
 }
 
 export default function Contact() {
+  const { toast } = useToast();
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -22,6 +25,7 @@ export default function Contact() {
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // --- HANDLE INPUT CHANGE ---
   const handleChange = (
@@ -53,7 +57,7 @@ export default function Contact() {
   };
 
   // --- FORM SUBMIT ---
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const validationErrors = validate();
@@ -62,10 +66,38 @@ export default function Contact() {
       return;
     }
 
-    setSubmitted(true);
+    setIsSubmitting(true);
 
-    // Here you can add a backend submission or email service (resend, formsubmit, etc.)
-    console.log("Form submitted:", formData);
+    try {
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+      };
+
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      setSubmitted(true);
+      setFormData({ name: "", email: "", message: "" });
+      toast({
+        title: "Message sent!",
+        description: "I'll get back to you shortly.",
+      });
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      toast({
+        title: "Failed to send",
+        description: "Please try again or use WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -174,8 +206,21 @@ export default function Contact() {
                 </div>
 
                 {/* SUBMIT BUTTON */}
-                <Button type="submit" className="w-full flex items-center gap-2">
-                  Send Message <Send className="w-4 h-4" />
+                <Button 
+                  type="submit" 
+                  className="w-full flex items-center gap-2"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message <Send className="w-4 h-4" />
+                    </>
+                  )}
                 </Button>
 
               </form>
