@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Mail, Phone, MapPin, Send, Loader2, CheckCircle2, XCircle } from "lucide-react";
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
 
 const formSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -34,36 +33,48 @@ const Contact = () => {
         setErrorMessage("");
 
         try {
-            // Replace these with your actual EmailJS credentials
-            const SERVICE_ID = "YOUR_SERVICE_ID";
-            const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-            const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+            const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+            
+            if (!FORMSPREE_ID) {
+                throw new Error("Formspree form ID is not configured in .env file");
+            }
 
-            await emailjs.send(
-                SERVICE_ID,
-                TEMPLATE_ID,
-                {
-                    from_name: data.name,
-                    reply_to: data.email,
-                    subject: data.subject,
-                    message: data.message,
-                },
-                PUBLIC_KEY
-            );
+            // Using URLSearchParams instead of FormData as it's more reliable with Formspree
+            const formData = new URLSearchParams();
+            formData.append('name', data.name);
+            formData.append('email', data.email);
+            formData.append('subject', data.subject);
+            formData.append('message', data.message);
+
+            const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.text();
+                console.error('Formspree error response:', errorData);
+                throw new Error(`Failed to send message. Status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            console.log('Formspree success:', responseData);
 
             setSubmitStatus("success");
             reset();
 
-            // Auto-hide success message after 5 seconds
             setTimeout(() => {
                 setSubmitStatus("idle");
             }, 5000);
         } catch (error) {
-            console.error("EmailJS Error:", error);
+            console.error("Formspree Error:", error);
             setSubmitStatus("error");
             setErrorMessage("Failed to send message. Please try again or email me directly.");
 
-            // Auto-hide error message after 5 seconds
             setTimeout(() => {
                 setSubmitStatus("idle");
             }, 5000);
@@ -200,7 +211,6 @@ const Contact = () => {
                                 )}
                             </div>
 
-                            {/* Status Messages */}
                             {submitStatus === "success" && (
                                 <div className="flex items-center gap-2 p-4 bg-green-500/10 border border-green-500/20 rounded-md text-green-600 dark:text-green-400 animate-in fade-in slide-in-from-top-2 duration-300">
                                     <CheckCircle2 className="w-5 h-5" />
@@ -234,7 +244,7 @@ const Contact = () => {
                             </button>
 
                             <div className="text-xs text-muted-foreground text-center mt-4">
-                                <p>Your message will be sent securely via EmailJS.</p>
+                                <p>Your message will be sent securely via Formspree.</p>
                                 <p className="mt-1">For urgent matters, please email me directly.</p>
                             </div>
                         </form>
