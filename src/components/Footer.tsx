@@ -32,7 +32,7 @@ const Footer = () => {
                 Joel Nathan
               </h3>
               <p className="text-muted-foreground">
-                Full-Stack Engineer specializing in system architecture, 
+                Full-Stack Engineer specializing in system architecture,
                 database design, and API development.
               </p>
             </div>
@@ -41,15 +41,17 @@ const Footer = () => {
             <div>
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <div className="space-y-2">
-                {["About", "Skills", "Services", "Portfolio", "Contact"].map((item) => (
-                  <a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="block text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {item}
-                  </a>
-                ))}
+                {["About", "Skills", "Services", "Portfolio", "Contact"].map(
+                  (item) => (
+                    <a
+                      key={item}
+                      href={`#${item.toLowerCase()}`}
+                      className="block text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {item}
+                    </a>
+                  )
+                )}
               </div>
             </div>
 

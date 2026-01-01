@@ -40,9 +40,17 @@ All colors MUST be HSL.
     --ring: 220 85% 55%;
 
     --radius: 1rem;
-    
-    --gradient-hero: linear-gradient(135deg, hsl(220 85% 55%) 0%, hsl(220 85% 65%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(45 100% 55%) 0%, hsl(45 100% 65%) 100%);
+
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(220 85% 55%) 0%,
+      hsl(220 85% 65%) 100%
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      hsl(45 100% 55%) 0%,
+      hsl(45 100% 65%) 100%
+    );
     --shadow-soft: 0 4px 20px -2px hsl(220 85% 55% / 0.15);
     --shadow-glow: 0 0 40px hsl(220 85% 55% / 0.3);
 
@@ -94,9 +102,17 @@ All colors MUST be HSL.
     --border: 220 15% 20%;
     --input: 220 15% 20%;
     --ring: 220 85% 60%;
-    
-    --gradient-hero: linear-gradient(135deg, hsl(220 85% 50%) 0%, hsl(220 85% 60%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(45 100% 50%) 0%, hsl(45 100% 60%) 100%);
+
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(220 85% 50%) 0%,
+      hsl(220 85% 60%) 100%
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      hsl(45 100% 50%) 0%,
+      hsl(45 100% 60%) 100%
+    );
     --shadow-soft: 0 4px 20px -2px hsl(220 85% 60% / 0.25);
     --shadow-glow: 0 0 40px hsl(220 85% 60% / 0.4);
     --sidebar-background: 240 5.9% 10%;
@@ -118,7 +134,7 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
@@ -128,29 +144,30 @@ All colors MUST be HSL.
   .gradient-hero {
     background: var(--gradient-hero);
   }
-  
+
   .gradient-accent {
     background: var(--gradient-accent);
   }
-  
+
   .shadow-soft {
     box-shadow: var(--shadow-soft);
   }
-  
+
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
-  
+
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-  
+
   .animate-float-delayed {
     animation: float 6s ease-in-out infinite 3s;
   }
-  
+
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px) rotate(0deg);
     }
     50% {

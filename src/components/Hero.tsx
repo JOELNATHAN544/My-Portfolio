@@ -8,7 +8,10 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-secondary to-background">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-secondary to-background"
+    >
       {/* Floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary/10 animate-float" />
@@ -25,7 +28,7 @@ const Hero = () => {
               <Code2 className="w-4 h-4" />
               <span>Available for new projects</span>
             </div>
-            
+
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                 Hi, I'm{" "}
@@ -52,22 +55,23 @@ const Hero = () => {
             </div>
 
             <p className="text-lg text-muted-foreground max-w-xl">
-              Specialized in building scalable systems, architecting robust databases, 
-              and designing high-performance APIs. I blend technical precision with 
-              creative thinking to deliver exceptional digital solutions.
+              Specialized in building scalable systems, architecting robust
+              databases, and designing high-performance APIs. I blend technical
+              precision with creative thinking to deliver exceptional digital
+              solutions.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="gradient-hero hover:shadow-glow transition-all duration-300 group"
                 onClick={() => scrollToSection("contact")}
               >
                 Get In Touch
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="outline"
                 onClick={() => scrollToSection("portfolio")}
               >
@@ -82,20 +86,24 @@ const Hero = () => {
               {/* Decorative circles */}
               <div className="absolute -top-4 -right-4 w-72 h-72 rounded-full bg-accent/20 blur-3xl" />
               <div className="absolute -bottom-4 -left-4 w-72 h-72 rounded-full bg-primary/20 blur-3xl" />
-              
+
               {/* Profile image container */}
               <div className="relative rounded-full overflow-hidden shadow-glow border-8 border-background aspect-square">
-                <img 
-                  src={profileImage} 
-                  alt="Joel Nathan Wanko Tchagang" 
+                <img
+                  src={profileImage}
+                  alt="Joel Nathan Wanko Tchagang"
                   className="w-full h-full object-cover"
                 />
               </div>
-              
+
               {/* Floating stats card */}
               <div className="absolute -bottom-8 -right-8 bg-card rounded-2xl p-6 shadow-soft border border-border animate-fade-in">
-                <div className="text-4xl font-bold gradient-hero bg-clip-text text-transparent">5+</div>
-                <div className="text-sm text-muted-foreground">Certifications</div>
+                <div className="text-4xl font-bold gradient-hero bg-clip-text text-transparent">
+                  5+
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Certifications
+                </div>
               </div>
             </div>
           </div>

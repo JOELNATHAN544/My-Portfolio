@@ -50,8 +50,7 @@ export default function Contact() {
     else if (!/\S+@\S+\.\S+/.test(formData.email))
       newErrors.email = "Invalid email format.";
 
-    if (!formData.message.trim())
-      newErrors.message = "Please enter a message.";
+    if (!formData.message.trim()) newErrors.message = "Please enter a message.";
 
     return newErrors;
   };
@@ -103,7 +102,6 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20">
       <div className="container max-w-5xl mx-auto px-4">
-
         {/* Section title */}
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl font-bold mb-4">Contact Me</h2>
@@ -113,13 +111,11 @@ export default function Contact() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-10">
-
           {/* CONTACT INFO CARD */}
           <Card className="p-8 shadow-soft animate-fade-in">
             <h3 className="text-2xl font-semibold mb-6">My Socials</h3>
 
             <div className="space-y-6">
-
               <a
                 href="mailto:wankojoelnathan@gmail.com"
                 className="flex items-center gap-4 group"
@@ -158,7 +154,6 @@ export default function Contact() {
               </p>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-
                 {/* NAME */}
                 <div>
                   <label className="font-medium">Name</label>
@@ -206,8 +201,8 @@ export default function Contact() {
                 </div>
 
                 {/* SUBMIT BUTTON */}
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="w-full flex items-center gap-2"
                   disabled={isSubmitting}
                 >
@@ -222,11 +217,9 @@ export default function Contact() {
                     </>
                   )}
                 </Button>
-
               </form>
             )}
           </Card>
-
         </div>
       </div>
     </section>

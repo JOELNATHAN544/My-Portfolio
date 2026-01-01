@@ -6,25 +6,33 @@ const Services = () => {
     {
       icon: Globe,
       title: "Web Design & Development",
-      description: "Full-stack website creation from beautiful frontend interfaces to robust backend systems. Crafting responsive, performant web applications that users love.",
-      features: ["Responsive Design", "Modern Frameworks", "Performance Optimization"],
+      description:
+        "Full-stack website creation from beautiful frontend interfaces to robust backend systems. Crafting responsive, performant web applications that users love.",
+      features: [
+        "Responsive Design",
+        "Modern Frameworks",
+        "Performance Optimization",
+      ],
     },
     {
       icon: Palette,
       title: "UI/UX Design",
-      description: "User-centered digital experiences that combine aesthetics with functionality. Creating intuitive interfaces that enhance user engagement and satisfaction.",
+      description:
+        "User-centered digital experiences that combine aesthetics with functionality. Creating intuitive interfaces that enhance user engagement and satisfaction.",
       features: ["User Research", "Wireframing", "Interactive Prototypes"],
     },
     {
       icon: Database,
       title: "Database Design",
-      description: "Efficient, scalable database architecture tailored to your needs. Designing data models that ensure integrity, performance, and easy maintenance.",
+      description:
+        "Efficient, scalable database architecture tailored to your needs. Designing data models that ensure integrity, performance, and easy maintenance.",
       features: ["Schema Design", "Query Optimization", "Data Migration"],
     },
     {
       icon: Zap,
       title: "RESTful API Development",
-      description: "High-performance and secure APIs that power modern applications. Building robust interfaces that seamlessly connect your frontend and backend systems.",
+      description:
+        "High-performance and secure APIs that power modern applications. Building robust interfaces that seamlessly connect your frontend and backend systems.",
       features: ["REST Architecture", "Authentication", "Documentation"],
     },
   ];
@@ -36,7 +44,10 @@ const Services = () => {
           {/* Section header */}
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-              My <span className="gradient-hero bg-clip-text text-transparent">Services</span>
+              My{" "}
+              <span className="gradient-hero bg-clip-text text-transparent">
+                Services
+              </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Comprehensive solutions to bring your digital vision to life
@@ -48,7 +59,7 @@ const Services = () => {
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <Card 
+                <Card
                   key={index}
                   className="p-8 shadow-soft hover:shadow-glow transition-all duration-300 group animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
@@ -65,7 +76,7 @@ const Services = () => {
 
                   <div className="space-y-2">
                     {service.features.map((feature, featureIndex) => (
-                      <div 
+                      <div
                         key={featureIndex}
                         className="flex items-center gap-2 text-sm"
                       >
