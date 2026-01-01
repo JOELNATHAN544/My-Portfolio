@@ -110,13 +110,16 @@ const Portfolio = () => {
   ];
 
   // Group projects by category
-  const projectsByCategory = projects.reduce((acc, project) => {
-    if (!acc[project.category]) {
-      acc[project.category] = [];
-    }
-    acc[project.category].push(project);
-    return acc;
-  }, {} as Record<string, typeof projects>);
+  const projectsByCategory = projects.reduce(
+    (acc, project) => {
+      if (!acc[project.category]) {
+        acc[project.category] = [];
+      }
+      acc[project.category].push(project);
+      return acc;
+    },
+    {} as Record<string, typeof projects>,
+  );
 
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [filteredProjects, setFilteredProjects] = useState(projects);
@@ -126,7 +129,7 @@ const Portfolio = () => {
       setFilteredProjects(projects);
     } else {
       setFilteredProjects(
-        projects.filter((project) => project.category === activeCategory)
+        projects.filter((project) => project.category === activeCategory),
       );
     }
   }, [activeCategory]);

@@ -50,7 +50,7 @@ const Footer = () => {
                     >
                       {item}
                     </a>
-                  )
+                  ),
                 )}
               </div>
             </div>

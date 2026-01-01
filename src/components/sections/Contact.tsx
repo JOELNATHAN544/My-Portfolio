@@ -84,7 +84,7 @@ const Contact = () => {
       console.error("Formspree Error:", error);
       setSubmitStatus("error");
       setErrorMessage(
-        "Failed to send message. Please try again or email me directly."
+        "Failed to send message. Please try again or email me directly.",
       );
 
       setTimeout(() => {
