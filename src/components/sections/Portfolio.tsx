@@ -17,7 +17,6 @@ const Portfolio = () => {
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Project Preview */}
-          
           <div className="relative group rounded-xl overflow-hidden border border-border shadow-lg aspect-video bg-background">
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 z-10">
               <div className="flex gap-4">
