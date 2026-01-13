@@ -31,11 +31,8 @@ jobs:
           VITE_FORMSPREE_ID: ${{ secrets.VITE_FORMSPREE_ID }}
           # Add other environment variables here
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-
       - name: Deploy to Vercel
-        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --confirm
+        run: npx vercel@latest --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
