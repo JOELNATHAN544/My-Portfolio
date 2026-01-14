@@ -32,8 +32,8 @@ const About = () => {
             </p>
             <div className="grid grid-cols-2 gap-4 pt-4">
               <div className="p-4 bg-background rounded-lg border border-border shadow-sm">
-                <h4 className="font-bold text-2xl text-primary">1</h4>
-                <p className="text-sm text-muted-foreground">Year Experience</p>
+                <h4 className="font-bold text-2xl text-primary">2</h4>
+                <p className="text-sm text-muted-foreground">Years Experience</p>
               </div>
               <div className="p-4 bg-background rounded-lg border border-border shadow-sm">
                 <h4 className="font-bold text-2xl text-accent">10+</h4>
