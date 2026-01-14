@@ -31,5 +31,11 @@ jobs:
           VITE_FORMSPREE_ID: ${{ secrets.VITE_FORMSPREE_ID }}
           # Add other environment variables here
 
+      - name: Remove .vercel directory
+        run: rm -rf .vercel
+
       - name: Deploy to Vercel
         run: npx vercel@latest --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
