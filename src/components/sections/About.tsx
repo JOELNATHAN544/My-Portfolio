@@ -1,6 +1,9 @@
 import { BookOpen, Award, Code } from "lucide-react";
 
 const About = () => {
+  const careerStartDate = new Date('2024-01-01');
+  const today = new Date();
+  const yearsOfExperience = today.getFullYear() - careerStartDate.getFullYear();
   return (
     <section id="about" className="py-20 bg-secondary/30">
       <div className="container px-4 md:px-6">
@@ -32,8 +35,8 @@ const About = () => {
             </p>
             <div className="grid grid-cols-2 gap-4 pt-4">
               <div className="p-4 bg-background rounded-lg border border-border shadow-sm">
-                <h4 className="font-bold text-2xl text-primary">2</h4>
-                <p className="text-sm text-muted-foreground">Years Experience</p>
+                <h4 className="font-bold text-2xl text-primary">{yearsOfExperience}</h4>
+                <p className="text-sm text-muted-foreground">{yearsOfExperience === 1 ? 'Year' : 'Years'} Experience</p>
               </div>
               <div className="p-4 bg-background rounded-lg border border-border shadow-sm">
                 <h4 className="font-bold text-2xl text-accent">10+</h4>
