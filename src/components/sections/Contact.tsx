@@ -9,8 +9,12 @@ import {
   Loader2,
   CheckCircle2,
   XCircle,
+  Facebook,
+  Instagram,
+  Linkedin,
 } from "lucide-react";
 import { useState } from "react";
+import TiktokIcon from "../icons/TiktokIcon";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -158,8 +162,33 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">Location</h4>
-                  <p className="text-muted-foreground">Bangangté, Cameroon</p>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Bangangt%C3%A9,Cameroon"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Bangangté, Cameroon
+                  </a>
                 </div>
+              </div>
+            </div>
+
+            <div className="mt-8 pt-8 border-t border-border">
+              <h4 className="font-semibold text-foreground mb-4">Follow me</h4>
+              <div className="flex items-center gap-4">
+                <a href="https://www.facebook.com/profile.php?id=61572991858016" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors">
+                  <Facebook className="w-6 h-6" />
+                </a>
+                <a href="https://www.instagram.com/wankojoelnathan/" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors">
+                  <Instagram className="w-6 h-6" />
+                </a>
+                <a href="https://www.tiktok.com/@joelnathanwanko" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors">
+                  <TiktokIcon className="w-6 h-6" />
+                </a>
+                <a href="https://www.linkedin.com/in/joelnathan-wanko-1a5a31341" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors">
+                  <Linkedin className="w-6 h-6" />
+                </a>
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import Services from "@/components/sections/Services";
 import Portfolio from "@/components/sections/Portfolio";
 import Musician from "@/components/sections/Musician";
 import Contact from "@/components/sections/Contact";
+import Certifications from "@/components/sections/Certifications";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
       <Services />
       <Portfolio />
       <Musician />
+      <Certifications />
       <Contact />
     </Layout>
   );
