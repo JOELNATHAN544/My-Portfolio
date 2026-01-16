@@ -18,7 +18,7 @@ export const projects: Project[] = [
     title: 'Linksphere App',
     category: 'Web Application',
     year: '2024',
-    image: '/linksphere-icon.png',
+    image: '/images/linksphere-icon.webp',
     description: 'A robust web application designed to simplify link management.',
     longDescription: 'Linksphere is a full-stack web application that allows users to upload, store, and organize URL links. It features secure user authentication, public and private link sharing, and a community feed of curated links. The application is built with a modern tech stack and is designed to be responsive and user-friendly.',
     features: [
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     title: 'Second Project',
     category: 'Coming Soon',
     year: '2024',
-    image: '/placeholder.png',
+    image: '/images/joel-profile.webp', // Using profile as a placeholder
     description: 'Details about the second project will be added here soon.',
     longDescription: 'This is a placeholder for a future project. More information will be available shortly.',
     features: ['Feature A', 'Feature B', 'Feature C'],
