@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Code2, Github, Linkedin, Mail } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, X, Code2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,13 +17,25 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    navigate('/');
+    setTimeout(() => {
+      const element = document.querySelector(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100); // Small delay to allow the page to change
+    setIsOpen(false);
+  };
+
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
     { name: "Services", href: "#services" },
     { name: "Portfolio", href: "#portfolio" },
-    { name: "Certifications", href: "#certifications" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -37,6 +51,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <a
           href="#home"
+          onClick={(e) => handleScrollTo(e, '#home')}
           className="text-2xl font-bold text-primary flex items-center gap-2"
         >
           <Code2 className="w-8 h-8" />
@@ -45,15 +60,29 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm uppercase tracking-wider"
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            if (link.href.startsWith('/')) {
+              return (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm uppercase tracking-wider"
+                >
+                  {link.name}
+                </Link>
+              );
+            }
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleScrollTo(e, link.href)}
+                className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm uppercase tracking-wider"
+              >
+                {link.name}
+              </a>
+            );
+          })}
           <a
             href="/resume.pdf"
             target="_blank"
@@ -81,16 +110,30 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border shadow-lg animate-accordion-down">
           <div className="flex flex-col p-6 gap-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-foreground/80 hover:text-primary transition-colors font-medium text-lg"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              if (link.href.startsWith('/')) {
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="text-foreground/80 hover:text-primary transition-colors font-medium text-lg"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              }
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-foreground/80 hover:text-primary transition-colors font-medium text-lg"
+                  onClick={(e) => handleScrollTo(e, link.href)}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
             <a
               href="/resume.pdf"
               target="_blank"
