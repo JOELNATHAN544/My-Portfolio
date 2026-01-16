@@ -3,6 +3,7 @@ import { projects } from '@/data/projects';
 import NotFound from './NotFound';
 import Layout from '@/components/layout/Layout';
 import { Github, ExternalLink } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,6 +15,7 @@ const ProjectDetail = () => {
 
   return (
     <Layout>
+      <SEO title={project.title} description={project.description} />
       <section className="py-20">
         <div className="container px-4 md:px-6">
           <div className="max-w-4xl mx-auto">

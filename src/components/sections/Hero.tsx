@@ -62,7 +62,7 @@ const Hero = () => {
             ></div>
             <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-background shadow-2xl bg-muted flex items-center justify-center">
               <img
-                src="/profile.png"
+                src="/images/profile.webp"
                 alt="Joel Nathan"
                 className="w-full h-full object-cover"
               />

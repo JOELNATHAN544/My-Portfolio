@@ -33,6 +33,7 @@ const Navbar = () => {
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Skills", href: "#skills" },
+    { name: "Tech Stack", href: "#tech-stack" },
     { name: "Services", href: "#services" },
     { name: "Portfolio", href: "#portfolio" },
     { name: "Blog", href: "/blog" },
@@ -55,7 +56,7 @@ const Navbar = () => {
           className="text-2xl font-bold text-primary flex items-center gap-2"
         >
           <Code2 className="w-8 h-8" />
-          <span className="hidden sm:inline">Joel Nathan</span>
+          <span className="hidden sm:inline">Wanko Joel Nathan</span>
         </a>
 
         {/* Desktop Navigation */}

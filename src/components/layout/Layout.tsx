@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import SEO from "../SEO";
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col bg-background font-sans text-foreground overflow-x-hidden">
+      <SEO />
       <Navbar />
       <main className="flex-grow pt-20">{children}</main>
       <Footer />

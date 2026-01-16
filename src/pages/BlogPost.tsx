@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { getPost, Post } from '@/lib/posts';
 import Layout from '@/components/layout/Layout';
 import NotFound from './NotFound';
+import SEO from '@/components/SEO';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -25,6 +26,7 @@ const BlogPost = () => {
 
   return (
     <Layout>
+      <SEO title={post.title} description={post.excerpt} />
       <section className="py-20">
         <div className="container px-4 md:px-6">
           <div className="max-w-3xl mx-auto">
