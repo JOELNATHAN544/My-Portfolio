@@ -7,7 +7,7 @@ A modern, responsive, and highly interactive personal developer portfolio and bl
 This project serves as a showcase of my skills, technical stack, services, and past projects, while also functioning as a dynamic Markdown-powered blog system.
 
 ## 🚀 Key Features
-
+ 
 - **Modern Tech Stack**: Built on React 18, Vite, TypeScript, and Tailwind CSS.
 - **Markdown Blog System**: Write blog posts natively in Markdown (powered by `gray-matter` & `react-markdown`).
 - **Interactive UI**: Fully accessible components using `shadcn/ui` and `Radix UI`.
