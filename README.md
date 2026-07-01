@@ -1,5 +1,7 @@
 # Wanko Joel Nathan - Developer Portfolio
 
+🌐 **Live Demo:** [https://my-portfolio-one-kappa-15.vercel.app/](https://my-portfolio-one-kappa-15.vercel.app/)
+
 A modern, responsive, and highly interactive personal developer portfolio and blog built with React, Vite, and Tailwind CSS. 
 
 This project serves as a showcase of my skills, technical stack, services, and past projects, while also functioning as a dynamic Markdown-powered blog system.
