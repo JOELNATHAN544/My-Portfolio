@@ -2,7 +2,7 @@ import { BookOpen, Award, Code } from "lucide-react";
 
 const About = () => {
   const careerStartDate = new Date('2024-01-01');
-  const today = new Date();    
+  const today = new Date();
   const yearsOfExperience = today.getFullYear() - careerStartDate.getFullYear();
   return (
     <section id="about" className="py-20 bg-secondary/30">
