@@ -1,73 +1,93 @@
-# Welcome to your Lovable project
+# Wanko Joel Nathan - Developer Portfolio
 
-## Project info
+🌐 **Live Demo:** [https://my-portfolio-one-kappa-15.vercel.app/](https://my-portfolio-one-kappa-15.vercel.app/)
 
-**URL**: https://lovable.dev/projects/83f14fe8-c7a2-4f95-bf57-4a93d436451f
+A modern, responsive, and highly interactive personal developer portfolio and blog built with React, Vite, and Tailwind CSS. 
 
-## How can I edit this code?
+This project serves as a showcase of my skills, technical stack, services, and past projects, while also functioning as a dynamic Markdown-powered blog system.
 
-There are several ways of editing your application.
+## 🚀 Key Features
 
-**Use Lovable**
+- **Modern Tech Stack**: Built on React 18, Vite, TypeScript, and Tailwind CSS.
+- **Markdown Blog System**: Write blog posts natively in Markdown (powered by `gray-matter` & `react-markdown`).
+- **Interactive UI**: Fully accessible components using `shadcn/ui` and `Radix UI`.
+- **Smooth Animations**: Scroll-triggered animations seamlessly integrated using `Framer Motion`.
+- **Functioning Contact Form**: Direct-to-inbox messaging via `EmailJS` (no backend required).
+- **Dark/Light Mode**: Smooth, one-click system-aware theme toggling.
+- **Image Optimization**: Custom scripts for WebP image conversion to ensure lightning-fast loads.
+- **SEO Ready**: Dynamic meta tags and titles managed via `react-helmet-async`.
+- **Automated Deployments**: CI/CD configured for instant Vercel deployments.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/83f14fe8-c7a2-4f95-bf57-4a93d436451f) and start prompting.
+## 🛠️ Technologies Used
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Framework**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Routing**: [React Router v6](https://reactrouter.com/)
+- **Form Handling**: [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) + [EmailJS](https://www.emailjs.com/)
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 💻 Getting Started (Local Development)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+To run this project locally, you will need Node.js and npm installed on your machine.
 
-Follow these steps:
+### 1. Clone the repository
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone https://github.com/JOELNATHAN544/My-Portfolio.git
+# Clone via HTTPS or SSH
+git clone <repository-url>
 
-# Step 2: Navigate to the project directory.
+# Navigate into the directory
 cd My-Portfolio
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 2. Install dependencies
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```sh
+npm install
+```
+
+### 3. Environment Variables
+
+Copy the example environment file and fill in your EmailJS credentials if you intend to test the contact form:
+
+```sh
+cp .env.example .env
+```
+
+Ensure your `.env` contains the correct variables:
+```env
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+### 4. Start the development server
+
+```sh
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will start running on your local network (usually `http://localhost:5173` or `http://localhost:8080`).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 📁 Project Structure highlights
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- `/src/posts/*.md` - This is where all blog posts live. Just add a new markdown file and it automatically appears on the site!
+- `/src/data/projects.ts` - Centralized data file for managing the portfolio projects grid.
+- `/src/components/sections/` - Modular homepage sections (Hero, About, Skills, Contact, etc.).
+- `/scripts/` - Custom Node scripts (e.g. `optimize-images.mjs` for WebP conversion).
 
-## What technologies are used for this project?
+## 🚀 Available Scripts
 
-This project is built with:
+In the project directory, you can run:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/83f14fe8-c7a2-4f95-bf57-4a93d436451f) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- `npm run dev` - Starts the development server.
+- `npm run build` - Builds the app for production (outputs to `/dist`).
+- `npm run preview` - Previews the production build locally.
+- `npm run lint` - Runs ESLint to check for code issues.
+- `npm run optimize-images` - Converts raw images to optimized `.webp` formats.
