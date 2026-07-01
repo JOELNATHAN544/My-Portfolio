@@ -14,18 +14,30 @@ const Index = () => {
   return (
     <Layout>
       <Hero />
-      <About />
-      <FadeIn>
+      <FadeIn direction="up" delay={0.2}>
+        <About />
+      </FadeIn>
+      <FadeIn direction="left" delay={0.1}>
         <Skills />
       </FadeIn>
-      <FadeIn>
+      <FadeIn direction="right" delay={0.1}>
         <TechStack />
       </FadeIn>
-      <Services />
-      <Portfolio />
-      <Musician />
-      <Certifications />
-      <Contact />
+      <FadeIn direction="up" delay={0.2}>
+        <Services />
+      </FadeIn>
+      <FadeIn direction="down" delay={0.1}>
+        <Portfolio />
+      </FadeIn>
+      <FadeIn direction="up" delay={0.3}>
+        <Musician />
+      </FadeIn>
+      <FadeIn direction="up" delay={0.2}>
+        <Certifications />
+      </FadeIn>
+      <FadeIn direction="up" delay={0.1}>
+        <Contact />
+      </FadeIn>
     </Layout>
   );
 };
