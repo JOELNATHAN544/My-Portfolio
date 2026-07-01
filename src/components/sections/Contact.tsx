@@ -14,6 +14,7 @@ import {
   Linkedin,
 } from "lucide-react";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import TiktokIcon from "../icons/TiktokIcon";
 
 const formSchema = z.object({
@@ -47,36 +48,35 @@ const Contact = () => {
     setErrorMessage("");
 
     try {
-      const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+      const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-      if (!FORMSPREE_ID) {
-        throw new Error("Formspree form ID is not configured in .env file");
+      if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+        throw new Error(
+          `Missing EmailJS credentials — SERVICE_ID: ${SERVICE_ID}, TEMPLATE_ID: ${TEMPLATE_ID}, PUBLIC_KEY: ${PUBLIC_KEY ? "set" : "missing"}`
+        );
       }
 
-      // Using URLSearchParams instead of FormData as it's more reliable with Formspree
-      const formData = new URLSearchParams();
-      formData.append("name", data.name);
-      formData.append("email", data.email);
-      formData.append("subject", data.subject);
-      formData.append("message", data.message);
+      console.log("EmailJS sending with:", { SERVICE_ID, TEMPLATE_ID });
 
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
+      const result = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          // Main notification template variables (sent TO Joel)
+          from_name: data.name,
+          from_email: data.email,
+          subject: data.subject,
+          from_message: data.message,
+          // Auto-reply template variables (sent back TO the visitor)
+          name: data.name,
+          email: data.email,
         },
-      });
+        PUBLIC_KEY
+      );
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error("Formspree error response:", errorData);
-        throw new Error(`Failed to send message. Status: ${response.status}`);
-      }
-
-      const responseData = await response.json();
-      console.log("Formspree success:", responseData);
+      console.log("EmailJS result:", result);
 
       setSubmitStatus("success");
       reset();
@@ -84,12 +84,21 @@ const Contact = () => {
       setTimeout(() => {
         setSubmitStatus("idle");
       }, 5000);
-    } catch (error) {
-      console.error("Formspree Error:", error);
+    } catch (error: unknown) {
+      console.error("EmailJS Error (full):", error);
+
+      // Extract specific error text from EmailJS response
+      let detail = "Failed to send message. Please try again or email me directly.";
+      if (error instanceof Error) {
+        detail = error.message;
+      } else if (typeof error === "object" && error !== null && "text" in error) {
+        detail = `EmailJS error: ${(error as { text: string }).text}`;
+      } else if (typeof error === "object" && error !== null && "status" in error) {
+        detail = `EmailJS HTTP ${(error as { status: number }).status} — check your Service ID & Template ID`;
+      }
+
       setSubmitStatus("error");
-      setErrorMessage(
-        "Failed to send message. Please try again or email me directly.",
-      );
+      setErrorMessage(detail);
 
       setTimeout(() => {
         setSubmitStatus("idle");
@@ -177,16 +186,36 @@ const Contact = () => {
             <div className="mt-8 pt-8 border-t border-border">
               <h4 className="font-semibold text-foreground mb-4">Follow me</h4>
               <div className="flex items-center gap-4">
-                <a href="https://www.facebook.com/profile.php?id=61572991858016" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61572991858016"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors"
+                >
                   <Facebook className="w-6 h-6" />
                 </a>
-                <a href="https://www.instagram.com/wankojoelnathan/" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors">
+                <a
+                  href="https://www.instagram.com/wankojoelnathan/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors"
+                >
                   <Instagram className="w-6 h-6" />
                 </a>
-                <a href="https://www.tiktok.com/@joelnathanwanko" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors">
+                <a
+                  href="https://www.tiktok.com/@joelnathanwanko"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors"
+                >
                   <TiktokIcon className="w-6 h-6" />
                 </a>
-                <a href="https://www.linkedin.com/in/joelnathan-wanko-1a5a31341" target="_blank" rel="noopener noreferrer" className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors">
+                <a
+                  href="https://www.linkedin.com/in/joelnathan-wanko-1a5a31341"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors"
+                >
                   <Linkedin className="w-6 h-6" />
                 </a>
               </div>
@@ -316,7 +345,7 @@ const Contact = () => {
               </button>
 
               <div className="text-xs text-muted-foreground text-center mt-4">
-                <p>Your message will be sent securely via Formspree.</p>
+                <p>Your message will be sent securely via EmailJS.</p>
                 <p className="mt-1">
                   For urgent matters, please email me directly.
                 </p>
