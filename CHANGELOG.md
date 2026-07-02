@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/JOELNATHAN544/My-Portfolio/compare/v1.0.0...v1.0.1) (2026-07-02)
+
+
+### Bug Fixes
+
+* add newline to release-please workflow configuration ([2158e46](https://github.com/JOELNATHAN544/My-Portfolio/commit/2158e46fc8bc57b6470ffb93ee5b84b572146898))
+
 ## [1.0.0](https://github.com/JOELNATHAN544/My-Portfolio/compare/v0.3.0...v1.0.0) (2026-07-02)
 
 
