@@ -19,6 +19,7 @@ jobs:
         id: release
         with:
           release-type: node
+          token: ${{ secrets.MY_PERSONAL_TOKEN }}
 
   deploy-vercel:
     needs: release-please
