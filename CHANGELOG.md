@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/JOELNATHAN544/My-Portfolio/compare/v1.1.0...v1.2.0) (2026-07-02)
+
+
+### Features
+
+* update release-please configuration formatting ([bc9a7fd](https://github.com/JOELNATHAN544/My-Portfolio/commit/bc9a7fdfe4fb59bdf9257121d18ba07daef36bc6))
+
 ## [1.1.0](https://github.com/JOELNATHAN544/My-Portfolio/compare/v1.0.1...v1.1.0) (2026-07-02)
 
 
