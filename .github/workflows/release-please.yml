@@ -20,7 +20,7 @@ jobs:
         with:
           release-type: node
           token: ${{ secrets.MY_PERSONAL_TOKEN }}
-
+ 
   deploy-vercel:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
