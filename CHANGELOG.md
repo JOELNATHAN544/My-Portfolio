@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/JOELNATHAN544/My-Portfolio/compare/v0.3.0...v1.0.0) (2026-07-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* fix whitespace formatting in release-please workflow configuration
+
+### Features
+
+* fix whitespace formatting in release-please workflow configuration ([a951c7e](https://github.com/JOELNATHAN544/My-Portfolio/commit/a951c7ec6d0aa5c603f80e53e21e715fec21effb))
+
+
+### Bug Fixes
+
+* fix whitespace formatting in release-please workflow configuration ([1ac59dd](https://github.com/JOELNATHAN544/My-Portfolio/commit/1ac59dd5703a6b793dafcb1a3fd27553e7b5ed97))
+
 ## [0.3.0](https://github.com/JOELNATHAN544/My-Portfolio/compare/v0.2.0...v0.3.0) (2026-07-02)
 
 
