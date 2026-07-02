@@ -9,7 +9,7 @@ export interface Post {
 }
 
 export async function getPosts(): Promise<Post[]> {
-  const postModules = import.meta.glob('/src/posts/*.md', { as: 'raw' });
+  const postModules = import.meta.glob('/src/posts/*.md', { query: '?raw', import: 'default' });
 
   const posts = await Promise.all(
     Object.entries(postModules).map(async ([path, getContents]) => {
