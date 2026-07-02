@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/JOELNATHAN544/My-Portfolio/compare/v1.0.1...v1.1.0) (2026-07-02)
+
+
+### Features
+
+* add Discord contact info and update post content loader ([2d6947c](https://github.com/JOELNATHAN544/My-Portfolio/commit/2d6947c926e33103858834ffc9040a07d8dee056))
+* add Discord contact information and fix post import configuration ([030ad05](https://github.com/JOELNATHAN544/My-Portfolio/commit/030ad05eabf357e0b48d23246bdfca2e3a3fe293))
+* update post import method and add Discord contact information to the contact section ([422a4b6](https://github.com/JOELNATHAN544/My-Portfolio/commit/422a4b60e1c1e0d176b139c8b4148b12a088debc))
+
+
+### Bug Fixes
+
+* cast raw post content to string to resolve type mismatches with gray-matter ([ee86cf2](https://github.com/JOELNATHAN544/My-Portfolio/commit/ee86cf29db335259efc6c12733a24b3424d58efe))
+
 ## [1.0.1](https://github.com/JOELNATHAN544/My-Portfolio/compare/v1.0.0...v1.0.1) (2026-07-02)
 
 
