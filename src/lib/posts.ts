@@ -14,7 +14,7 @@ export async function getPosts(): Promise<Post[]> {
   const posts = await Promise.all(
     Object.entries(postModules).map(async ([path, getContents]) => {
       const slug = path.replace('/src/posts/', '').replace('.md', '');
-      const rawContent = await getContents();
+      const rawContent = await getContents() as string;
       const { data, content } = matter(rawContent);
 
       return {
@@ -33,7 +33,7 @@ export async function getPosts(): Promise<Post[]> {
 export async function getPost(slug: string): Promise<Post | null> {
   try {
     const rawContent = await import(`../posts/${slug}.md?raw`);
-    const { data, content } = matter(rawContent.default);
+    const { data, content } = matter(rawContent.default as string);
 
     return {
       slug,
