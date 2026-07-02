@@ -16,6 +16,7 @@ import {
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import TiktokIcon from "../icons/TiktokIcon";
+import DiscordIcon from "../icons/DiscordIcon";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -181,6 +182,16 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
+
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-primary/10 rounded-lg text-primary">
+                  <DiscordIcon className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-foreground">Discord</h4>
+                  <p className="text-muted-foreground">wankojoelnathan_03633</p>
+                </div>
+              </div>
             </div>
 
             <div className="mt-8 pt-8 border-t border-border">
@@ -211,12 +222,20 @@ const Contact = () => {
                   <TiktokIcon className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/joelnathan-wanko-1a5a31341"
+                  href="https://www.linkedin.com/in/joel-nathan-wanko-1a5a31341/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors"
                 >
                   <Linkedin className="w-6 h-6" />
+                </a>
+                <a
+                  href="https://discord.com/users/wankojoelnathan_03633"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors"
+                >
+                  <DiscordIcon className="w-6 h-6" />
                 </a>
               </div>
             </div>
